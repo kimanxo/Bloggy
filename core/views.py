@@ -1,9 +1,7 @@
-from pydoc import HTMLRepr
-from django.http import HttpResponse, HttpResponse as HttpResponse
+from django.http import HttpResponse, HttpResponse as HttpResponse, HttpResponseNotAllowed
 from django.views.generic import ListView, TemplateView
 from django.views.generic import View
 from .models import Category, Author, Article, Contact, Testimonial, Comment, Subscriber
-
 from django.views.generic.edit import CreateView
 from .forms import ContactForm
 from django_htmx.http import (
@@ -65,7 +63,7 @@ class IndexView(View):
             )
 
     def post(self, request):
-        if request.htmx and request.header.get("src") == "newsletter":
+        if request.htmx and request.headers.get("src") == "newsletters":
             try:
 
                 if (
@@ -88,7 +86,7 @@ class IndexView(View):
                     {"message": "Congrats!, you're subscribed now"},
                 )
         else:
-            return HttpResponse("")
+            return HttpResponseNotAllowed("GET")
 
 
 # using django generic class based view ListView to render  a template that contains a list of elements for the same db tabl

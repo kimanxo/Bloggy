@@ -1,0 +1,39 @@
+<nav class="nav"
+  x-data="{
+    showNavigation:false
+  }"
+>
+  <div>
+    <span><a href="{% url 'index' %}">BLoggy</a> </span>
+    <div>
+      <div class="mob_user_act">
+        {% include 'user_actions.html' %}
+      </div>
+      <span
+      x-on:click="showNavigation = !showNavigation"
+      x-text="showNavigation ? 'X' : '|||' "
+      :class="showNavigation ? 'x' : 'burger' "
+      role="button" 
+      >    
+    </span>
+    </div>
+  </div>
+
+   <ul x-show="showNavigation" class="mob">
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="{% url 'blog' %}">Blog</a></li>
+    <li><a href="{% url 'about' %}">About US</a></li>
+    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+    <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+  </ul> 
+
+  <ul class="desk">
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="{% url 'blog' %}">Blog</a></li>
+    <li><a href="{% url 'about' %}">About US</a></li>
+    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+    <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+    {% include 'user_actions.html' %}
+  </ul>
+
+</nav>

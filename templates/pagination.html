@@ -1,0 +1,50 @@
+<style>
+  .pagination {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: auto;
+  }
+  .page {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: var(--black);
+    color: var(--yellow);
+    padding: 0.75rem;
+    border-radius: var(--rounded);
+    border: none;
+  }
+  
+  .disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+</style>
+
+<div class="pagination">
+  {% if page_obj.number == 1 %}
+    <button disabled class="page disabled">1</button>
+  {% else %}
+    <button hx-trigger="click" hx-swap="outerHTML" hx-target=".posts" hx-get="{% url 'blog' %}?page=1" class="page">1</button>
+  {% endif %}
+
+  {% if page_obj.has_previous %}
+    <button hx-trigger="click" hx-swap="outerHTML" hx-target=".posts" hx-get="{% url 'blog' %}?page={{ page_obj.number|add:'-1' }}" class="page">&lt;</button>
+  {% else %}
+    <button disabled class="page disabled">&lt;</button>
+  {% endif %}
+
+  <span class="page">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+
+  {% if page_obj.has_next %}
+    <button hx-trigger="click" hx-swap="outerHTML" hx-target=".posts" hx-get="{% url 'blog' %}?page={{ page_obj.number|add:'1' }}" class="page">&gt;</button>
+  {% else %}
+    <button disabled class="page disabled">&gt;</button>
+  {% endif %}
+
+  {% if page_obj.number == page_obj.paginator.num_pages %}
+    <button disabled class="disabled page">{{ page_obj.paginator.num_pages }}</button>
+  {% else %}
+    <button hx-trigger="click" hx-swap="outerHTML" hx-target=".posts" hx-get="{% url 'blog' %}?page={{ page_obj.paginator.num_pages }}" class="page">{{ page_obj.paginator.num_pages }}</button>
+  {% endif %}
+</div>

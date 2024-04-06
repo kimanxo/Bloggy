@@ -1,0 +1,5 @@
+<form class="form" method="post">
+  {% csrf_token %}
+  <input type="email" name="email" required id="email" placeholder="Enter Your Email" />
+  <button type="submit" hx-trigger="click" hx-target=".form" hx-post="" hx-headers="{'src':'newsletter'}" hx-swap="outerHTML">subscribe</button>
+</form>

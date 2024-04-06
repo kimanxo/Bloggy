@@ -1,0 +1,27 @@
+{% load static %}
+
+<main>
+  <article class="featured_post">
+    <h2>Featured Post</h2>
+    <img src="{{ featured.image.url }}" alt="post photo" />
+    <span>By <span class="author_name"><a href="{% url 'author_posts' featured.author.pk %}">{{ featured.author.name|title }}</a></span> | {{ featured.created_at|date:'N j, Y, H:m:s' }}</span>
+    <h3>{{ featured.title|title }}</h3>
+    <p>{{ featured.excert }}</p>
+    <a href="{% url 'article' featured.pk %}" id="link">Read More &gt;</a>
+  </article>
+
+  <section class="suggested_articles">
+    <div>
+      <h4>Latest posts</h4>
+      <a href="{% url 'blog' %}">view all</a>
+    </div>
+    <ul>
+      {% for article in articles %}
+        <li>
+          <span>By <a href="{% url 'author_posts' article.author.pk %}" class="author_name">{{ article.author.name|title }}</a> | {{ article.created_at|date:'N j, Y, H:m:s' }}</span>
+          <a href="{% url 'article' article.pk %}">{{ article.title }} &nearrow;</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+</main>

@@ -1,0 +1,36 @@
+{% load static %}
+<section class="testimonials">
+  <h3>What people say about our blog</h3>
+
+  {% if testimonials %}
+    {% for testimonial in testimonials %}
+      <div class="testimonial">
+        <caption>" {{ testimonial.content }} "</caption>
+        <div class="person">
+          <img src="{{ testimonial.image.url }}" alt="user image" id="user_image" />
+          <div>
+            <h4>{{ testimonial.name }}</h4>
+            <span>{{ testimonial.description }}</span>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    there are no testimonials yet
+  {% endif %}
+
+
+      
+
+<div>
+  {% if testimonials.has_previous %}
+    <img src="{% static 'landing/previous.svg' %}" alt="previous" id="previous" role="button" hx-trigger="click" hx-swap="outerHTML" hx-target=".testimonials" hx-get="{% url 'index' %}?page={{ testimonials.previous_page_number }}" />
+  {% endif %}
+
+  {% if testimonials.has_next %}
+    <img src="{% static 'landing/next.svg' %}" alt="next" id="next" role="button" hx-trigger="click" hx-swap="outerHTML" hx-target=".testimonials" hx-get="{% url 'index' %}?page={{ testimonials.next_page_number }}" />
+  {% endif %}
+</div> 
+
+ 
+</section>

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Settings
+{% endblock %}
+{% block css %}
+  {% static 'settings/style.css' %}
+{% endblock %}
+{% block content %}
+  <main>
+    <h1>Settings</h1>
+    <section class="change_image">
+      <img src="{{ profile.picture }}" alt="" />
+      <p>Change picture </p>
+    </section>
+    <section class="change_logins">
+      <article>
+        <div>
+          <p>Your Username</p>
+        </div>
+        <div>
+          <p>{{request.user.username }}</p>
+          <a href="">Change</a>
+        </div>
+      </article>
+      <article>
+        <div>
+          <p>Your Email</p>
+        </div>
+        <div>
+          <p>{{request.user.email }}</p>
+          <a href="{% url 'account_email' %}">Change</a>
+        </div>
+      </article>
+      <article>
+        <div>
+          <p>Your Password</p>
+        </div>
+        <div>
+          <p>**********</p>
+          <a href="{% url 'account_change_password' %}">Change</a>
+        </div>
+      </article>
+    </section>
+  </main>
+{% endblock %}

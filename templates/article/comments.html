@@ -1,0 +1,24 @@
+{% load static %}
+
+<section class="comments">
+  {% if request.user.is_authenticated %}
+    <form class="input">
+      {% csrf_token %}
+      <img src="{% static 'article/user.svg' %}" alt="user" />
+      <textarea name="comment" class="input_box" placeholder="Type Something.." required rows="1" contenteditable="true"></textarea>
+      <img src="{% static 'article/send.png' %}" role="button" id="send"  hx-post="" hx-headers='{"src": "comment"}' hx-target=".cmts" style="cursor: pointer; width: 1.5rem;" />
+    </form>
+
+    <div class="cmts">
+    {% if comments %}
+        {% include 'article/cmts.html' %}
+      </div>
+    {% else %}
+      <p>There are no comments yet, be the first one to comment !</p>
+    {% endif %}
+  {% else %}
+    <p class="notAuthorized">
+      You need to <a href="{% url 'account_login' %}">login</a> to be able to see comments & comment
+    </p>
+  {% endif %}
+</section>

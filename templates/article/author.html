@@ -1,0 +1,9 @@
+<div class="post_author">
+  <a href="{% url 'author_posts' article.author.pk %}"><img src="{{ article.author.image.url }}" alt="author" /></a>
+  <div>
+    <span>{{ article.author.name|title }}</span>
+    <p>
+      <a href="{% url 'category_posts' article.category.pk %}">{{ article.category.name|upper }}</a> | {{ article.created_at|date:'N j, Y, H:m:s' }}
+    </p>
+  </div>
+</div>

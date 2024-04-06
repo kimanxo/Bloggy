@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Privacy Policy
+{% endblock %}
+{% block css %}
+  {% static 'privacy_policy/styles.css' %}
+{% endblock %}
+
+{% block content %}
+  <main>
+    <header>
+      <h1>Privacy Policy</h1>
+      <p>Last Updated on Dec 28th 2023</p>
+    </header>
+    <section>
+      <h2>Introduction</h2>
+      <p>This privacy policy applies to the use of our blog and app. It describes how we collect, use, and protect your personal information .</p>
+
+      <h2>Types of Data Collected</h2>
+      <p>We only collect User account credentials from users who create accounts on our app, This includes your username and password, which are used to authenticate your account and allow you to comment and rate posts.</p>
+
+      <h2>How Data is Used</h2>
+      <p>
+        We use your user account credentials for the following purposes:<ul class="ul">
+          <li>To enable you to comment and rate posts on our blog.</li>
+          <li>To protect the security of your account and prevent unauthorized access.</li>
+        </ul>
+      </p>
+
+      <h2>Data Sharing and Disclosure</h2>
+      <p>We do not share your personal information with any third parties, except as necessary to provide our services or comply with legal requirements.</p>
+
+      <h2>Data Security</h2>
+      <p>
+        We take precautions to protect your personal information from unauthorized access, use, or disclosure. These precautions include:<ul class="ul">
+          <li>Using secure passwords and encryption technologies.</li>
+          <li>Limiting access to your personal information to authorized employees.</li>
+        </ul>
+      </p>
+      <h2>User Rights</h2>
+      <p>
+        You have the following rights regarding your personal information:<ul class="ul">
+          <li>The right to access your personal information.</li>
+          <li>The right to correct any inaccuracies in your personal information.</li>
+          <li>The right to delete your personal information.</li>
+          <li>The right to object to the processing of your personal information.</li>
+        </ul>
+      </p>
+
+      <h2>Changes to the Policy</h2>
+      <p>We may update this privacy policy from time to time. If we make any material changes, we will notify you by email or through a notice on our blog.</p>
+
+      <h2>Contact Us</h2>
+      <p>If you have any questions about this privacy policy, please contact us at [your email address].</p>
+    </section>
+  </main>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load allauth account %}
+{% block title %}
+        {% trans "Login" %} 
+{% endblock title %}
+{% block css %}
+  {% static 'login/styles.css' %}
+{% endblock %}
+{% block content %}
+<script src="{% static 'login/login.js' %}" defer></script>
+
+<main>
+    <img id="women" src="{% static 'connect.png' %}" alt="">
+    <section>
+    {% element h1 %}
+        {% trans "Login" %}
+    {% endelement %}
+   
+    {% url 'account_login' as login_url %}
+    {% element form form=form method="post" action=login_url tags="entrance,login" %}
+        {% slot body %}
+            {% csrf_token %}
+            {% element fields form=form unlabeled=True %}
+            {% endelement %}
+            {% if redirect_field_value %}
+                <input type="hidden"
+                       name="{{ redirect_field_name }}"
+                       value="{{ redirect_field_value }}" />
+            {% endif %}
+        {% endslot %}
+        {% slot actions %}
+            {% element button type="submit" tags="prominent,login" %}
+                {% trans "Sign In" %}
+            {% endelement %}
+        {% endslot %}
+    {% endelement %}
+    {% if SOCIALACCOUNT_ENABLED %}
+        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+    {% endif %}
+    
+
+    <div class="or_socials">
+    <hr >
+    <span>or</span>
+    <hr >
+
+    </div>
+
+
+    <div class="socials">
+        <a href="/accounts/github/login"><img src="{% static 'github.png' %}"id="github" alt="github logo"></a>
+        <a href="/accounts/yandex/login"><img src="{% static 'yandex.png' %}"id="yandex" alt="yandex logo"></a>
+        <a href="/accounts/google/login"><img src="{% static 'google.png' %}"id="google" alt="google logo"></a>
+        
+    </div>
+    <p>
+        {% blocktrans %}Don't have an account ? 
+    <a id="register_link" href="{{ signup_url }}">Register</a>{% endblocktrans %}
+    </p>
+    </section>
+</main>
+{% endblock content %}

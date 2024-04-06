@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Contact Us
+{% endblock %}
+{% block css %}
+  {% static 'contact/styles.css' %}
+{% endblock %}
+{% block content %}
+  <main>
+    <header>
+      <h1>Let's Start a Conversation</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti fuga vitae at unde earum voluptate iste dolore eius dolor provident.</p>
+    </header>
+    <section>
+      <span>Contact Us</span>
+      <hr />
+      <h2>+213541731456</h2>
+      <span>kimanxo@yandex.ru</span>
+      <hr />
+      <span>Working hours</span>
+      <hr />
+
+      <h2>Saturday To Thursday</h2>
+      <h2>09:00 AM to 05:00 PM</h2>
+      <span>Our Support Team is Availabe 8/6</span>
+    </section>
+    <form class="contact_form" action="{% url 'contact' %}" method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        {{ field }}
+        {% if field.errors %}
+          <p class="error">{{ field.errors.as_text }}</p>
+        {% endif %}
+      {% endfor %}
+
+
+      <button hx-post="{% url 'contact'  %}" hx-trigger="click" hx-target="body">Send Message</button>
+    </form>
+  </main>
+{% endblock %}

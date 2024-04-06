@@ -1,0 +1,62 @@
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+
+header div {
+  position: relative;
+}
+
+header div span {
+  position: absolute;
+  top: -0.5rem;
+  right: -1.24rem;
+  background-color: var(--yellow);
+  padding: 0.25rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: var(--mid-gray);
+}
+
+header h1 {
+  color: var(--black);
+}
+
+header h2 {
+  color: var(--dark-gray);
+  font-weight: 300;
+}
+
+header p {
+  width: 100%;
+  line-height: 1.5rem;
+  text-align: center;
+  color: var(--mid-gray);
+}
+
+.category_posts {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+#category {
+  color: var(--blue);
+}
+
+@media screen and (min-width: 768px) {
+  main {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,14 @@
+{% load static %}
+
+<header style="background-image: url('{{ latest.image.url }}')">
+  <div>
+    <span>Posted On <b> <a href="{% url 'category_posts' latest.category.pk  %}"> {{ latest.category.name|upper }} </a></b></span>
+    <h1>{{ latest.title }}</h1>
+    <p>
+      By <span id="author"> <a href="{% url 'author_posts' latest.author.pk  %}"> {{ latest.author.name|title }} </a> </span> | {{ latest.created_at|date:'N j, Y, H:m:s' }}
+    </p>
+    <p>{{ latest.excert }}</p>
+    <a href="{% url 'article' latest.pk %} " id="link">Read More &gt;</a>
+  </div>
+</header>
+ 

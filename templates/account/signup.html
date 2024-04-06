@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load allauth i18n %}
+{% block title %}
+    Register
+{% endblock title %}
+{% block css %}
+  {% static 'register/styles.css' %}
+{% endblock %}
+{% block content %}
+
+<script src="{% static 'register/register.js' %}" defer></script>
+
+<main>
+    <img src="{% static 'connect.png' %}" alt="">
+    <section>
+    {% element h1 %}
+        {% trans "Create an account" %}
+    {% endelement %}
+    
+    {% url 'account_signup' as action_url %}
+    {% element form form=form method="post" action=action_url tags="entrance,signup" %}
+        {% slot body %}
+            {% csrf_token %}
+            {% element fields form=form unlabeled=True %}
+            {% endelement %}
+            {% if redirect_field_value %}
+                <input type="hidden"
+                       name="{{ redirect_field_name }}"
+                       value="{{ redirect_field_value }}" />
+            {% endif %}
+        {% endslot %}
+        {% slot actions %}
+            {% element button tags="prominent,signup" type="submit" %}
+                {% trans "Sign Up" %}
+            {% endelement %}
+        {% endslot %}
+    {% endelement %}
+    {% if SOCIALACCOUNT_ENABLED %}
+        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+    {% endif %}
+    <p>
+        {% blocktrans %}Already have an account? <a id="login-link" href="{{ login_url }}" >Login</a>.{% endblocktrans %}
+    </p>
+    </section>
+</main>
+{% endblock content %}

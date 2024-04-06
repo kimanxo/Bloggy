@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ request.user.username }}'s Reading List
+{% endblock %}
+{% block css %}
+  {% static 'reading_list/style.css' %}
+{% endblock %}
+{% block content %}
+  <main>
+    <h1>Reading list</h1>
+    <section class="container">
+      {% if articles %}
+      {% for article in articles %}
+        <article class="post">
+          <img src="{{ article.image.url }}" alt="post" />
+          <div>
+            <a href="{% url 'category_posts' article.category.pk %}" id="category">{{ article.category.pk|upper }}</a>
+            <h3><a href="{% url 'article' article.pk %}">{{ article.title }}</a></h3>
+            <p>{{ article.excert|truncatechars:150 }}.</p>
+          </div>
+        </article>
+      {% endfor %}
+      {% else %}
+        <p>your haven't added any articles to your list.</p>
+      {% endif %}
+    </section>
+  </main>
+{% endblock %}

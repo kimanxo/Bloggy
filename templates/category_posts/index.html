@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Posts about {{ category.pk|title }} 
+{% endblock %}
+{% block css %}
+  {% static 'category_posts/style.css' %}
+{% endblock %}
+{% block content %}
+  <header>
+    <div>
+      <h1>{{ category.pk|upper }}</h1>
+      <span>{{ count }}</span>
+    </div>
+    <h2><a href="{% url 'blog' %}">Blog</a> &gt; {{ category.pk|upper }}</h2>
+    <p>{{ category.description }}</p>
+  </header>
+  <main>
+    <section class="category_posts">
+      {% for article in articles %}
+      <link rel="stylesheet" href="{% static 'post.css' %}">
+
+    <article class="post"> 
+        <img src="{{ article.image.url }}" alt="post" />
+        <div>
+          <a href="{% url 'category_posts' article.category.pk %}" id="category">{{ article.category.pk|upper }}</a>
+          <h3><a href="{% url 'article' article.pk %}">{{ article.title }}</a></h3>
+          <p>{{ article.excert|truncatechars:150 }}.</p>
+        </div>
+      </article>
+      {% endfor %}
+
+      {% include 'pagination.html' %}
+    </section>
+    
+
+  </main>
+{% endblock %}

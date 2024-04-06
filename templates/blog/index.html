@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  blog
+{% endblock %}
+{% block css %}
+  {% static 'blog/style.css' %}
+{% endblock %}
+{% block content %}
+  {% include 'blog/header.html' %}
+  {% include 'blog/posts.html' %}
+
+  {% include 'categories.html' %}
+{% endblock %}

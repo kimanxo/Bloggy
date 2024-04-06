@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block meta_desc %}{% endblock meta_desc %}">
+    <link rel="stylesheet" href="{% static 'root.css' %}">
+    <link rel="stylesheet" href="{% block css %}{% endblock css %}">
+    <script defer src="{% static 'alpine.js' %}"></script>
+    <script defer src="{% static 'htmx.js' %}"></script>
+    <title>  {% block title %}{% endblock title %}  </title>
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=660e9eee2a2af700191bf77f&product=inline-share-buttons" async='async'></script>
+</head>
+<body>
+{% include "navbar.html" %}
+
+{% block content %}{% endblock content %}
+
+{% include 'footer.html' %}
+
+
+</body>
+</html>

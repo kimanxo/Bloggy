@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Author posts
+{% endblock %}
+{% block css %}
+{% static 'author_posts/styles.css' %}
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'post.css' %}" />
+
+
+{% include 'author_posts/author.html' %}
+
+<section class="author_posts">
+  <h2>My Posts</h2>
+  {% for article in articles %}
+      <article class="post">
+        <img src="{{ article.image.url }}" alt="post" />
+        <div>
+          <a href="{% url 'category_posts' article.category.pk %}" id="category">{{ article.category.pk|upper }}</a>
+          <h3><a href="{% url 'article' article.pk %}">{{ article.title }}</a></h3>
+          <p>{{ article.excert|truncatechars:150 }}.</p>
+        </div>
+      </article>
+    {% endfor %}    
+    {% include 'pagination.html' %}
+  </section>
+  
+  {% include 'categories.html' %}
+{% endblock %}

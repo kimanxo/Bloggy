@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  About Us
+{% endblock %}
+{% block css %}
+  {% static 'about/styles.css' %}
+{% endblock %}
+{% block content %}
+  <main>
+    {% include 'about/header.html' %}
+    {% include 'about/missvis.html' %}
+    {% include 'about/team.html' %}
+    {% include 'about/wws.html' %}
+  </main>
+{% endblock %}

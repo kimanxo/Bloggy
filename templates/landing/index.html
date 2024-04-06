@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Bloggy
+{% endblock %}
+{% block css %}
+  {% static 'landing/style.css' %}
+{% endblock %}
+{% block content %}
+  {% include 'landing/header.html' %}
+
+  {% include 'landing/posts.html' %}
+
+  <!-- separator -->
+  <div class="separator">
+    <span></span>
+    <span></span>
+  </div>
+
+  {% include 'categories.html' %}
+  {% include 'landing/authors.html' %}
+  <h2 class="section_title">Testimonials</h2>
+
+  {% include 'landing/testimonials.html' %}
+{% endblock %}

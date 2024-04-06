@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ article.title }}
+{% endblock %}
+
+{% block meta_desc %}
+  {{ article.excert }}
+{% endblock %}
+
+{% block css %}
+  {% static 'article/styles.css' %}
+{% endblock %}
+{% block content %}
+  <script src="{% static 'article/send.js' %}" defer></script>
+  {% include 'article/author.html' %}
+  {% include 'article/post.html' %}
+  {% include 'article/comments.html' %}
+{% endblock %}

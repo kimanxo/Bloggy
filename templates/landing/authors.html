@@ -1,0 +1,33 @@
+{% load static %}
+
+{% if authors %}
+  <h2 class="section_title">Authors</h2>
+  <ul class="authors">
+    {% for author in authors %}
+      <li class="author">
+        <img src="{{ author.image.url }}" alt="author" />
+        <div>
+          <a href="{% url 'author_posts' author.pk %}"><h3>{{ author.name|title }}</h3></a>
+          <p>{{ author.description|slice:":16" }}...</p> 
+          <ul>
+            {% if author.facebook %}
+              <li>
+                <a href="{{ author.facebook }}"><img src="{% static 'landing/facebook.svg' %}" alt="facebook" /></a>
+              </li>
+            {% endif %}
+            {% if author.instagram %}
+              <li>
+                <a href="{{ author.instagram }}"><img src="{% static 'landing/instagram.svg' %}" alt="instagram" /></a>
+              </li>
+            {% endif %}
+            {% if author.twitter %}
+              <li>
+                <a href="{{ author.twitter }}"><img src="{% static 'landing/twitter.svg' %}" alt="twitter" /></a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

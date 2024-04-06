@@ -1,0 +1,20 @@
+<footer>
+  <section>
+    <p>Subscribe to our news letter to get latest updates and news.</p>
+    {% include 'newsletter.html' %}
+  </section>
+  <nav>
+    <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'blog' %}">Blog</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+    </ul>
+  </nav>
+  <div class="socials"></div>
+  <div class="copyright"> Bloggy. All Rights Reserved <span id="year"></span> &copy;</div>
+</footer>
+<script>
+    document.querySelector("#year").textContent = new Date().getFullYear()  
+</script>

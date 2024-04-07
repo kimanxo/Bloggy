@@ -1,9 +1,17 @@
 {% extends "base.html" %}
+{% load static %}
 {% load allauth i18n %}
-{% block head_title %}
-    {% trans "Email Addresses" %}
-{% endblock head_title %}
+{% block title %}
+    Email Management
+{% endblock title %}
+{% block css %}
+  {% static 'settings/email.css' %}
+{% endblock %}
 {% block content %}
+<script src="{% static 'register/register.js' %}" defer></script>
+<main>
+    <img src="{% static 'connect.png' %}" alt="">
+    <section>
     {% element h1 %}
         {% trans "Email Addresses" %}
     {% endelement %}
@@ -13,6 +21,7 @@
         {% element form form=form action=email_url method="post" %}
             {% slot body %}
                 {% csrf_token %}
+                <div class="status">
                 {% for radio in emailaddress_radios %}
                     {% with emailaddress=radio.emailaddress %}
                         {% element field type="radio" checked=radio.checked name="email" value=emailaddress.email id=radio.id %}
@@ -36,8 +45,10 @@
                         {% endelement %}
                     {% endwith %}
                 {% endfor %}
+                </div>
             {% endslot %}
             {% slot actions %}
+            <div class="actions">
                 {% element button type="submit" name="action_primary" %}
                     {% trans 'Make Primary' %}
                 {% endelement %}
@@ -47,6 +58,7 @@
                 {% element button tags="danger,delete" type="submit" name="action_remove" %}
                     {% trans 'Remove' %}
                 {% endelement %}
+            </div>
             {% endslot %}
         {% endelement %}
     {% else %}
@@ -72,6 +84,8 @@
             {% endslot %}
         {% endelement %}
     {% endif %}
+    </section>
+</main>
 {% endblock content %}
 {% block extra_body %}
     <script type="text/javascript">

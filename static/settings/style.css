@@ -1,73 +1,75 @@
-main{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 2rem;
-    width: 100%;
-    max-width: 40rem;
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
+  width: 100%;
+  max-width: 40rem;
 }
 
-h1{
-    font-size: 1.5rem;
+h1 {
+  font-size: 1.5rem;
 }
 
-.change_image{
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    margin: 2rem auto ;
+.change_image {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 2rem auto;
 }
 
-.change_image img{
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
+.change_image img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
 }
 
-.change_image p{
-    color: var(--Blue, #306998);
-
+.change_image p {
+  color: var(--Blue, #306998);
 }
 
-.change_logins{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin: 2rem auto ;
-
+.change_logins {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem auto;
 }
 
-
-.change_logins article{
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
+.change_logins article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.change_logins article div:last-child{
-    display: flex;
-    background: rgba(35, 37, 54, 0.04);
-    border-radius: var(--rounded);
-    padding: 1rem;
-    
+.change_logins article div:last-child {
+  display: flex;
+  background: rgba(35, 37, 54, 0.04);
+  border-radius: var(--rounded);
+  padding: 1rem;
 }
-
 
 .change_logins article div:last-child p:first-child {
-    width: 80%;
-    color: #808080;
-    
+  width: 80%;
+  color: #808080;
 }
 
 .change_logins article div:last-child a {
-    border-left: 1px solid black;
-    padding-left: 1rem;
-    color: var(--Blue, #306998);
-    font-weight: 600;
-    
+  border-left: 1px solid black;
+  padding-left: 1rem;
+  color: var(--Blue, #306998);
+  font-weight: 600;
 }
 
+@media screen and (min-width: 768px) {
+  main {
+    width: 50%;
+    margin: auto;
+  }
+  h1 {
+    margin: auto;
+    font-size: 2rem;
+  }
+}

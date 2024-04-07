@@ -22,7 +22,7 @@
   gap: 1rem;
 }
 
-.post_author span {
+.post_author .author{
   color: var(--blue);
   font-weight: 600;
 }

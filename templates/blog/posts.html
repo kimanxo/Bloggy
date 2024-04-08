@@ -1,15 +1,15 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'post.css' %}" />
-<main class="posts">
-  <section>
+<main>
+  <section class="searchbar">
     <h2>All Posts</h2>
-    <input type="search"  name="query" placeholder="Search" />
+    <input type="search" name="query" placeholder="Search" />
   </section>
 
   <hr />
 
-  <section>
+  <section class="posts">
     {% for article in articles %}
       <article class="post">
         <img src="{{ article.image.url }}" alt="post" />
@@ -20,8 +20,6 @@
         </div>
       </article>
     {% endfor %}
-
-    
 
     {% include 'pagination.html' %}
   </section>

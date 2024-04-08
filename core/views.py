@@ -219,6 +219,7 @@ class ArticleView(View):
                     "article": article,
                     "comments": comments,
                     "count": commentos.count(),
+                    "articles": Article.objects.prefetch_related.all()
                 },
             )
 

@@ -10,13 +10,20 @@ h1 {
   font-size: 1.5rem;
 }
 
+header section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+
 header > section p {
   line-height: 1.3rem;
 }
 
-main{
+main {
   padding: 2rem;
-
 }
 
 #link {
@@ -40,6 +47,7 @@ main{
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: 1rem;
 }
 
 .searchbar input {

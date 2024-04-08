@@ -7,7 +7,7 @@
     {% for category in categories %}
       <a href="{% url 'category_posts' category.pk|lower %}">
         <li>
-          <img src="{{ category.image.url }}" alt="logo" />
+          <img loading="lazy" loading="lazy" src="{{ category.image.url }}" alt="logo" />
           <h3>{{ category.name|title }}</h3>
           <p>{{ category.description }}</p>
         </li>

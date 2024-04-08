@@ -1,12 +1,12 @@
-  {% load static %}
-  
-  <link rel="stylesheet" href="{% static 'post.css' %}">
+{% load static %}
 
-  <article class="post">
-      <img src="{% static 'post.jpg' %}" alt="post" />
-      <div>
-        <span id="category">STARTUP</span>
-        <h3>Design tips for designers that cover everything you need</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel illum odit nulla provident neque? Iusto quos voluptatum expedita unde harum.</p>
-      </div>
-    </article>
+<link rel="stylesheet" href="{% static 'post.css' %}" />
+
+<article class="post">
+  <img loading="lazy" loading="lazy" src="{% static 'post.jpg' %}" alt="post" />
+  <div>
+    <span id="category">STARTUP</span>
+    <h3>Design tips for designers that cover everything you need</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel illum odit nulla provident neque? Iusto quos voluptatum expedita unde harum.</p>
+  </div>
+</article>

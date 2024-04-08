@@ -1,17 +1,13 @@
 {% load static %}
 
 <header>
+  <img loading="lazy" src="{{ latest.image.url }}" alt="post picture" />
+  <section>
+    <span>LATEST POST</span>
+    <h1>{{ latest.title }}</h1>
 
-    <img src="{{ latest.image.url }}" alt="post picture">
-    <section>
-        <span>LATEST POST</span>
-        <h1>{{ latest.title }}</h1>
-      
-        <span>By <a  id="author" href="{% url 'author_posts' latest.author.pk %}">{{ latest.author.name}}</a> | {{ latest.created_at|date:'N j, Y, H:m:s' }} </span>
-        <p>{{ latest.excert }}</p>
-        <a href="{% url 'article' latest.pk %}" id="link">Read more</a>
-    </section>
-
+    <span>By <a id="author" href="{% url 'author_posts' latest.author.pk %}">{{ latest.author.name }}</a> | {{ latest.created_at|date:'N j, Y, H:m:s' }}</span>
+    <p>{{ latest.excert }}</p>
+    <a href="{% url 'article' latest.pk %}" id="link">Read more</a>
+  </section>
 </header>
-
-

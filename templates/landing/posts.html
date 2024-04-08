@@ -3,7 +3,7 @@
 <main>
   <article class="featured_post">
     <h2>Featured Post</h2>
-    <img src="{{ featured.image.url }}" alt="post photo" />
+    <img loading="lazy" src="{{ featured.image.url }}" alt="post photo" />
     <span>By <span class="author_name"><a href="{% url 'author_posts' featured.author.pk %}">{{ featured.author.name|title }}</a></span> | {{ featured.created_at|date:'N j, Y, H:m:s' }}</span>
     <h3>{{ featured.title|title }}</h3>
     <p>{{ featured.excert }}</p>

@@ -1,4 +1,8 @@
-from django.http import HttpResponse, HttpResponse as HttpResponse, HttpResponseNotAllowed
+from django.http import (
+    HttpResponse,
+    HttpResponse as HttpResponse,
+    HttpResponseNotAllowed,
+)
 from django.views.generic import ListView, TemplateView
 from django.views.generic import View
 from .models import Category, Author, Article, Contact, Testimonial, Comment, Subscriber
@@ -219,7 +223,7 @@ class ArticleView(View):
                     "article": article,
                     "comments": comments,
                     "count": commentos.count(),
-                    "articles": Article.objects.prefetch_related.all()
+                    "articles": Article.objects.prefetch_related().all(),
                 },
             )
 

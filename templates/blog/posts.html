@@ -1,7 +1,7 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'post.css' %}" />
-<main>
+<main id="posts">
   <section class="searchbar">
     <h2>All Posts</h2>
     <input type="search" name="query" placeholder="Search" />
@@ -12,7 +12,7 @@
   <section class="posts">
     {% for article in articles %}
       <article class="post">
-        <img src="{{ article.image.url }}" alt="post" />
+        <img loading="lazy" src="{{ article.image.url }}" alt="post" />
         <div>
           <a href="{% url 'category_posts' article.category.pk %}" id="category">{{ article.category.pk|upper }}</a>
           <h3><a href="{% url 'article' article.pk %}">{{ article.title }}</a></h3>

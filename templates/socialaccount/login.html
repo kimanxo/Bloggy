@@ -10,7 +10,7 @@
 {% endblock %}
 {% block content %}
   <main>
-    <img id="women" src="{% static 'connect.png' %}" alt="" />
+    <img loading="lazy" id="women" src="{% static 'connect.png' %}" alt="" />
     <section>
       {% if process == 'connect' %}
         {% element h1 %}
@@ -27,10 +27,10 @@
           {% blocktrans with provider.name as provider %}You are about to sign in using a third-party account from {{ provider }}.{% endblocktrans %}
         </p>
       {% endif %}
-      {% element form method='post' no_visible_fields=True %}
+      {% element form method = 'post' no_visible_fields = True %}
       {% slot actions %}
       {% csrf_token %}
-      {% element button type='submit' %}
+      {% element button type = 'submit' %}
       {% trans 'Continue' %}
       {% endelement %}
       {% endslot %}

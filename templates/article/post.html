@@ -2,7 +2,7 @@
 <article class="post_content">
   <h1>{{ article.title }}</h1>
 
-  <img src="{{ article.image.url }}" alt="article image" />
+  <img loading="lazy" src="{{ article.image.url }}" alt="article image" />
   <h2>{{ article.excert }}</h2>
 
   <div class="content">
@@ -15,7 +15,7 @@
         <span class="count up_count">{{ article.upvote}}</span>
         <span class="down" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"down"}'  hx-target=".rt">&darr;</span>
         <span class="count">{{ article.downvote}}</span>
-        <img src="{% static 'article/comment.svg' %}" alt="comment icon" id="commentIcon" />
+        <img loading="lazy" src="{% static 'article/comment.svg' %}" alt="comment icon" id="commentIcon" />
         <span class="count">{{ count }}</span>
         </div>
         <div class="sharethis-inline-share-buttons" ></div>

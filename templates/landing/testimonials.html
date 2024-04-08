@@ -7,7 +7,7 @@
       <div class="testimonial">
         <caption>" {{ testimonial.content }} "</caption>
         <div class="person">
-          <img src="{{ testimonial.image.url }}" alt="user image" id="user_image" />
+          <img loading="lazy" src="{{ testimonial.image.url }}" alt="user image" id="user_image" />
           <div>
             <h4>{{ testimonial.name }}</h4>
             <span>{{ testimonial.description }}</span>
@@ -19,18 +19,13 @@
     there are no testimonials yet
   {% endif %}
 
+  <div>
+    {% if testimonials.has_previous %}
+      <img loading="lazy" src="{% static 'landing/previous.svg' %}" alt="previous" id="previous" role="button" hx-trigger="click" hx-swap="outerHTML" hx-target=".testimonials" hx-get="{% url 'index' %}?page={{ testimonials.previous_page_number }}" />
+    {% endif %}
 
-      
-
-<div>
-  {% if testimonials.has_previous %}
-    <img src="{% static 'landing/previous.svg' %}" alt="previous" id="previous" role="button" hx-trigger="click" hx-swap="outerHTML" hx-target=".testimonials" hx-get="{% url 'index' %}?page={{ testimonials.previous_page_number }}" />
-  {% endif %}
-
-  {% if testimonials.has_next %}
-    <img src="{% static 'landing/next.svg' %}" alt="next" id="next" role="button" hx-trigger="click" hx-swap="outerHTML" hx-target=".testimonials" hx-get="{% url 'index' %}?page={{ testimonials.next_page_number }}" />
-  {% endif %}
-</div> 
-
- 
+    {% if testimonials.has_next %}
+      <img loading="lazy" src="{% static 'landing/next.svg' %}" alt="next" id="next" role="button" hx-trigger="click" hx-swap="outerHTML" hx-target=".testimonials" hx-get="{% url 'index' %}?page={{ testimonials.next_page_number }}" />
+    {% endif %}
+  </div>
 </section>

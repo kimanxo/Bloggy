@@ -1,56 +1,69 @@
-.post{
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.post {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 1rem;
   width: 100%;
+  height: auto;
+  overflow-y: hidden;
 }
+
 .post img {
-  
   height: 20rem;
   width: 100%;
   border-radius: var(--rounded);
-
 }
 
-.post h3{
-  padding: 0.5rem 0;
+.post div {
+  height: 100%;
+  width: 100%;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: end !important;
+  gap: 1rem;
 }
- 
 
-.post p{
-  color:var(--mid-gray);
+.post p {
+  color: var(--mid-gray);
   line-height: 1.3rem;
 }
 
+#category {
+  color: var(--blue);
+}
 
-#category{
-  color : var(--blue) 
+hr {
+  width: 100%;
 }
 
 @media screen and (min-width: 768px) {
-
-
-.post{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 2rem;
-  width: 80%;
-  height: 200px;
-  place-self: start;
-
-}
-.post img {
-  max-width: 30%;
-  height: 100%;
-}
-
-
-.post div {
-  display: flex;
-  flex-direction: column;
-  
-}
-
+  .post {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 2rem;
+    width: 100%;
+    place-self: start;
+  }
+  .post img {
+    height: 15rem;
+    width: 20rem;
+  }
+  .post div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+    gap: 1rem;
+    padding: 0;
+  }
 }

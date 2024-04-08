@@ -1,14 +1,13 @@
-
 {% load static %}
 <header>
-    <img src="{{ author.image.url }}" alt="{{ author.name }} photo">
-    <div class="details">
-        <h1>Hey there, I'm {{ author.name }} and Welcome to my blog! </h1>
-        <p>{{ author.description }}</p>
-        <div class="rating">
-            <span> &uarr; </span>
-            <span>7</span>
-            <span>&darr;</span>
-        </div>
+  <img loading="lazy" src="{{ author.image.url }}" alt="{{ author.name }} photo" />
+  <div class="details">
+    <h1>Hey there, I'm {{ author.name }} and Welcome to my blog!</h1>
+    <p>{{ author.description }}</p>
+    <div class="rating">
+      <span>&uarr;</span>
+      <span>7</span>
+      <span>&darr;</span>
     </div>
+  </div>
 </header>

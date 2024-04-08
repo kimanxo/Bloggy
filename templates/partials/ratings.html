@@ -3,6 +3,6 @@
             <span class="count up_count">{{article.upvote}}</span>
             <span class="down" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"down"}'  hx-target=".rt">&darr;</span>
             <span class="count">{{article.downvote}}</span>
-            <img src="" alt="comment icon" id="commentIcon" />
+            <img loading="lazy" src="" alt="comment icon" id="commentIcon" />
             <span class="count">1</span>
       </div>

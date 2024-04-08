@@ -1,12 +1,12 @@
 {% load static %}
 {% for comment in comments %}
   <div class="comment">
-    <img src="{% static 'article/user.svg' %}" alt="" />
+    <img loading="lazy" src="{% static 'article/user.svg' %}" alt="" />
     <div>
       <div class="commenter">
         <span>{{ comment.user.username }}</span>
         <span>2mo ago</span> 
-        <img  src="{% static 'article/delete.svg' %}" style="cursor: pointer; width: 1.5rem;"  hx-delete=""  hx-target=".cmts" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "comment":"{{ comment.pk }}"}' hx-confirm="Are you sure you wish to delete this comment?" />  
+        <img loading="lazy"  src="{% static 'article/delete.svg' %}" style="cursor: pointer; width: 1.5rem;"  hx-delete=""  hx-target=".cmts" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "comment":"{{ comment.pk }}"}' hx-confirm="Are you sure you wish to delete this comment?" />  
       </div>
       
       <p>{{ comment.content|safe }}.</p>

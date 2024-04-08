@@ -11,8 +11,8 @@
   <main>
     <h1>Settings</h1>
     <section class="change_image">
-      <img src="{{ profile.picture }}" alt="" />
-      <p>Change picture </p>
+      <img loading="lazy" src="{{ profile.picture }}" alt="" />
+      <p>Change picture</p>
     </section>
     <section class="change_logins">
       <article>
@@ -20,7 +20,7 @@
           <p>Your Username</p>
         </div>
         <div>
-          <p>{{request.user.username }}</p>
+          <p>{{ request.user.username }}</p>
           <a href="">Change</a>
         </div>
       </article>
@@ -29,7 +29,7 @@
           <p>Your Email</p>
         </div>
         <div>
-          <p>{{request.user.email }}</p>
+          <p>{{ request.user.email }}</p>
           <a href="{% url 'account_email' %}">Change</a>
         </div>
       </article>

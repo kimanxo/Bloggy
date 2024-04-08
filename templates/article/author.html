@@ -1,5 +1,5 @@
 <div class="post_author">
-  <a href="{% url 'author_posts' article.author.pk %}"><img src="{{ article.author.image.url }}" alt="author" /></a>
+  <a href="{% url 'author_posts' article.author.pk %}"><img loading="lazy" src="{{ article.author.image.url }}" alt="author" /></a>
   <div>
     <a class="author" href="{% url 'author_posts' article.author.pk %}">{{ article.author.name|title }}</a>
     <p>

@@ -4,9 +4,9 @@
   {% if request.user.is_authenticated %}
     <form class="input">
       {% csrf_token %}
-      <img src="{% static 'article/user.svg' %}" alt="user" />
+      <img loading="lazy" src="{% static 'article/user.svg' %}" alt="user" />
       <textarea name="comment" class="input_box" placeholder="Type Something.." required rows="1" contenteditable="true"></textarea>
-      <img src="{% static 'article/send.png' %}" role="button" id="send"  hx-post="" hx-headers='{"src": "comment"}' hx-target=".cmts" style="cursor: pointer; width: 1.5rem;" />
+      <img loading="lazy" src="{% static 'article/send.png' %}" role="button" id="send"  hx-post="" hx-headers='{"src": "comment"}' hx-target=".cmts" style="cursor: pointer; width: 1.5rem;" />
     </form>
 
     <div class="cmts">

@@ -4,8 +4,9 @@
 <main id="posts">
   <section class="searchbar">
     <h2>All Posts</h2>
-    <input type="search" name="query" placeholder="Search" />
+    <input type="search" name="query" hx-get="" hx-trigger="keyup changed delay:1s" hx-target=".search_results" placeholder="Search by title ..." hx-swap="innerHTML" hx-headers='{"src": "search"}' />
   </section>
+  <div class="search_results"></div>
 
   <hr />
 

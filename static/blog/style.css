@@ -63,6 +63,16 @@ hr {
   margin: 2rem auto;
 }
 
+.search_results {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  width: 100%;
+  max-height: 25rem;
+  overflow-y: scroll;
+  z-index: 100;
+}
+
 @media screen and (min-width: 768px) {
   main {
     padding: 1.5rem;
@@ -96,5 +106,9 @@ hr {
 
   header > section p {
     line-height: 1.5rem;
+  }
+  .search_results {
+    padding: 1.5rem;
+    padding-left: 0;
   }
 }

@@ -1,3 +1,4 @@
+from turtle import title
 from django.http import (
     HttpResponse,
     HttpResponse as HttpResponse,
@@ -12,8 +13,8 @@ from django_htmx.http import (
     retarget,
 )  # target swap locations in the DOM from the server
 from django.core.paginator import Paginator
-from django.shortcuts import render
 from django.utils.decorators import method_decorator
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 
@@ -104,7 +105,10 @@ class BlogView(ListView):
 
     # returning the right page if the request is htmx originated , else return the wole page
     def get_template_names(self) -> list[str]:
+        query = self.request.GET.get("query")
         super().get_template_names()
+        if self.request.htmx and self.request.headers.get("src") == "search":
+            return "post.html", query
         if self.request.htmx:
             return "blog/posts.html"
         return "blog/index.html"
@@ -115,6 +119,11 @@ class BlogView(ListView):
         context["latest"] = (
             Article.objects.prefetch_related().order_by("-created_at").first()
         )
+        query = self.request.GET.get("query")
+        if query:
+            context["results"] = Article.objects.prefetch_related().filter(
+                title__icontains=query
+            )
         return context
 
 

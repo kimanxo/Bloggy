@@ -2,11 +2,19 @@
 
 <link rel="stylesheet" href="{% static 'post.css' %}" />
 
-<article class="post">
-  <img loading="lazy" loading="lazy" src="{% static 'post.jpg' %}" alt="post" />
-  <div>
-    <span id="category">STARTUP</span>
-    <h3>Design tips for designers that cover everything you need</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel illum odit nulla provident neque? Iusto quos voluptatum expedita unde harum.</p>
-  </div>
-</article>
+<section class="posts">
+  {% if results %}
+    {% for article in results %}
+      <article class="post">
+        <img loading="lazy" src="{{ article.image.url }}" alt="post" />
+        <div>
+          <a href="{% url 'category_posts' article.category.pk %}" id="category">{{ article.category.pk|upper }}</a>
+          <h3><a href="{% url 'article' article.pk %}">{{ article.title }}</a></h3>
+          <p>{{ article.excert|truncatechars:150 }}.</p>
+        </div>
+      </article>
+    {% endfor %}
+  {% else %}
+    <span id="no_results">there are not results for this query</span>
+  {% endif %}
+</section>

@@ -2,11 +2,12 @@
 
 <section class="comments">
   {% if request.user.is_authenticated %}
+    
     <form class="input">
       {% csrf_token %}
-      <img loading="lazy" src="{% static 'article/user.svg' %}" alt="user" />
+      <img loading="lazy" src="{{ profile.picture }}" style="width: 3rem; height: 3rem; border-radius: 50%;" alt="user" />
       <textarea name="comment" class="input_box" placeholder="Type Something.." required rows="1" contenteditable="true"></textarea>
-      <img loading="lazy" src="{% static 'article/send.png' %}" role="button" id="send"  hx-post="" hx-headers='{"src": "comment"}' hx-target=".cmts" style="cursor: pointer; width: 1.5rem;" />
+      <button class="cmnt_btn" type="button"><img loading="lazy" src="{% static 'article/send.png' %}" role="button" id="send"  hx-post="" hx-headers='{"src": "comment"}' hx-target=".cmts" style="cursor: pointer; width: 1.5rem;" /></button>
     </form>
 
     <div class="cmts">

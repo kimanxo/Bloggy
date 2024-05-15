@@ -1,15 +1,32 @@
-{% load static %}
-{% for comment in comments %}
-  <div class="comment">
-    <img loading="lazy" src="{% static 'article/user.svg' %}" alt="" />
-    <div>
-      <div class="commenter">
-        <span>{{ comment.user.username }}</span>
-        <span>2mo ago</span> 
-        <img loading="lazy"  src="{% static 'article/delete.svg' %}" style="cursor: pointer; width: 1.5rem;"  hx-delete=""  hx-target=".cmts" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "comment":"{{ comment.pk }}"}' hx-confirm="Are you sure you wish to delete this comment?" />  
+{% load static %} {% for comment in comments %}
+<div class="comment">
+  <img
+    loading="lazy"
+    src="{{ comment.user.profile.first.picture }}"
+    style="width: 3rem; height: 3rem; border-radius: 50%"
+    alt="{{comment.user}}"
+  />
+  <div>
+    <div class="commenter">
+      <div class="info">
+        <span id="user">{{ comment.user.username }}</span>
+        <span id="time">2mo ago</span>
+
+        {% if request.user == comment.user %}
+
+        <img
+          loading="lazy"
+          src="{% static 'article/delete.svg' %}"
+          style="cursor: pointer; width: 1.5rem"
+          hx-delete=""
+          hx-target=".cmts"
+          hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "comment":"{{ comment.pk }}"}'
+          hx-confirm="Are you sure you wish to delete this comment?"
+        />
       </div>
-      
-      <p>{{ comment.content|safe }}.</p>
+      {% endif %}
     </div>
+    <p>{{ comment.content|safe }}.</p>
   </div>
+</div>
 {% endfor %}

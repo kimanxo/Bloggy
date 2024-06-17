@@ -1,6 +1,7 @@
 {% load static %}
 <div class="rt" data-authenticated="{{ request.user.is_authenticated }}">
     {% if upvoted %}
+        
         <img src="{% static 'article/upvoted.png' %}" class="vote_btn_up" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"up"}' hx-target=".rt">
     {% else %}
         <img src="{% static 'article/upvote.png' %}" class="vote_btn_up" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"up"}' hx-target=".rt">

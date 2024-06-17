@@ -218,12 +218,20 @@ class ArticleView(View):
         article = Article.objects.prefetch_related().get(pk=pk)  # fetching the article
         is_bookmarked = False
         is_scheduled = False
+        upvoted = False
+        downvoted = False
         if request.user.is_authenticated:
             is_bookmarked = Favourite.objects.filter(
                 user=request.user, post=article
             ).exists()
             is_scheduled = ReadLater.objects.filter(
                 user=request.user, post=article
+            ).exists()
+            upvoted = Vote.objects.filter(
+                user=request.user, article=article, vote_type="up"
+            ).exists()
+            downvoted = Vote.objects.filter(
+                user=request.user, article=article, vote_type="down"
             ).exists()
         commentos = (
             Comment.objects.prefetch_related()
@@ -256,6 +264,9 @@ class ArticleView(View):
                     ).exclude(pk=pk),
                     "is_bookmarked": is_bookmarked,
                     "is_scheduled": is_scheduled,
+                    "upvoted" : upvoted,
+                    "downvoted" : downvoted
+                    
                 },
             )
 
@@ -295,14 +306,22 @@ class ArticleView(View):
                 user_vote.save()
             else:
                 if src == "up":
-                    Vote.objects.create(user=request.user, article=article, vote_type="up")
+                    Vote.objects.create(
+                        user=request.user, article=article, vote_type="up"
+                    )
                     article.upvote += 1
                 elif src == "down":
-                    Vote.objects.create(user=request.user, article=article, vote_type="down")
+                    Vote.objects.create(
+                        user=request.user, article=article, vote_type="down"
+                    )
                     article.downvote += 1
             article.save()
-            upvoted = Vote.objects.filter(user=request.user, article=article, vote_type='up').exists()
-            downvoted = Vote.objects.filter(user=request.user, article=article, vote_type='down').exists()
+            upvoted = Vote.objects.filter(
+                user=request.user, article=article, vote_type="up"
+            ).exists()
+            downvoted = Vote.objects.filter(
+                user=request.user, article=article, vote_type="down"
+            ).exists()
 
             return render(
                 request,
@@ -397,5 +416,37 @@ class SavedPostsView(TemplateView):
             items = Favourite.objects.filter(user=self.request.user)
         except AttributeError:
             items = None
+        context["items"] = items
+        return context
+
+
+class UpvotedPostsView(TemplateView):
+    template_name = "upvoted_posts/index.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Retrieve upvoted articles by the current user
+        items = Vote.objects.filter(user=self.request.user, vote_type="up")
+
+        context["items"] = items
+        return context
+
+
+class DownvotedPostsView(TemplateView):
+    template_name = "downvoted_posts/index.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Retrieve upvoted articles by the current user
+        items = Vote.objects.filter(user=self.request.user, vote_type="down")
+
         context["items"] = items
         return context

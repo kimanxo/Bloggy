@@ -19,20 +19,28 @@
     </article>
     <article class="user_links" x-show="showOptions">
       <a href="{% url 'reading_list' %}" class="opt">
-        <img loading="lazy" loading="lazy"  src="{% static 'login/reading_list.svg' %}" alt="" />
+        <img loading="lazy"  src="{% static 'login/reading_list.svg' %}" alt="" />
         <p>Reading List</p>
       </a>
       
       <a href="{% url 'saved_posts' %}" class="opt">
-        <img loading="lazy" loading="lazy"  src="{% static 'login/saved_posts.svg' %}" alt="" />
+        <img loading="lazy"   src="{% static 'login/saved_posts.svg' %}" alt="" />
         <p>Saved Posts</p>
       </a>
+      <a href="{% url 'downvoted_posts' %}" class="opt">
+        <img loading="lazy"   src="{% static 'article/downvote.png' %}" class="vote_btn_up" alt="" />
+        <p>Upvoted posts</p>
+      </a>
+      <a href="{% url 'upvoted_posts' %}" class="opt">
+        <img loading="lazy"   src="{% static 'article/downvote.png' %}" class="vote_btn_down" alt="" />
+        <p>Downvoted posts</p>
+      </a>
       <a href="{% url 'settings' %}" class="opt">
-        <img loading="lazy" loading="lazy"  src="{% static 'login/settings.svg' %}" alt="" />
+        <img loading="lazy"   src="{% static 'login/settings.svg' %}" alt="" />
         <p>Settings</p>
       </a>
       <a href="{% url 'account_logout' %}" class="opt">
-        <img loading="lazy" loading="lazy"  src="{% static 'login/logout.svg' %}" alt="" />
+        <img loading="lazy"   src="{% static 'login/logout.svg' %}" alt="" />
         <p>Logout</p>
       </a>
     </article>

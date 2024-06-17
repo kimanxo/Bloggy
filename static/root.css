@@ -132,6 +132,17 @@ nav li {
   gap: 1rem;
 }
 
+.vote_btn_down, .vote_btn_up{
+  width: 1.5rem ;
+  height: 2rem ;
+}
+.vote_btn_down{
+  rotate: 90deg
+}
+.vote_btn_up{
+  rotate: -90deg
+}
+
 .opt:last-child {
   color: #ff5959;
 }

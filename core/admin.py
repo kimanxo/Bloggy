@@ -8,9 +8,9 @@ from .models import (
     Testimonial,
     Profile,
     ReadingList,
-    SavedPosts,
     Newsletter,
-    Subscriber
+    Subscriber,
+    Favourite,
 )
 
 
@@ -100,6 +100,6 @@ class TestimonialAdmin(admin.ModelAdmin):
 admin.site.register(Testimonial, TestimonialAdmin)
 admin.site.register(Profile)
 admin.site.register(ReadingList)
-admin.site.register(SavedPosts)
 admin.site.register(Newsletter)
 admin.site.register(Subscriber)
+admin.site.register(Favourite)

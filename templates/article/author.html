@@ -1,9 +1,27 @@
+{% load static %}
 <div class="post_author">
-  <a href="{% url 'author_posts' article.author.pk %}"><img loading="lazy" src="{{ article.author.image.url }}" alt="author" /></a>
+  <a href="{% url 'author_posts' article.author.pk %}"
+    ><img loading="lazy" src="{{ article.author.image.url }}" alt="author"
+  /></a>
   <div>
-    <a class="author" href="{% url 'author_posts' article.author.pk %}">{{ article.author.name|title }}</a>
+    <a class="author" href="{% url 'author_posts' article.author.pk %}"
+      >{{ article.author.name|title }}</a
+    >
     <p>
-      <a href="{% url 'category_posts' article.category.pk %}">{{ article.category.name|upper }}</a> | {{ article.created_at|date:'N j, Y, H:m:s' }}
+      <a href="{% url 'category_posts' article.category.pk %}"
+        >{{ article.category.name|upper }}</a
+      >
+      | {{ article.created_at|date:'N j, Y, H:m:s' }}
     </p>
   </div>
+
+  {% if user.is_authenticated %}
+  {% include 'partials/bookmark.html' %}
+  <img
+    src="{% static 'article/read_later.png' %}"
+    alt=""
+    id="read_later"
+    title="save article to read later"
+  />
+  {% endif %}
 </div>

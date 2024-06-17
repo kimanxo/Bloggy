@@ -1,0 +1,12 @@
+{% load static %}
+<img
+    src="{% static 'article/bookmark.png' %}"
+    alt=""
+    id="bookmark"
+    title="save article to favourites"
+    hx-post=""
+    hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"bookmark"}'
+    hx-target="#bookmark"
+    hx-swap="outerHTML"
+    hx-vals='{ "article": "{{article.pk}}" }'
+  />

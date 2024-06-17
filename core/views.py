@@ -1,4 +1,3 @@
-from turtle import title
 from django.http import (
     HttpResponse,
     HttpResponse as HttpResponse,
@@ -6,7 +5,16 @@ from django.http import (
 )
 from django.views.generic import ListView, TemplateView
 from django.views.generic import View
-from .models import Category, Author, Article, Contact, Testimonial, Comment, Subscriber
+from .models import (
+    Category,
+    Author,
+    Article,
+    Contact,
+    Testimonial,
+    Comment,
+    Subscriber,
+    Favourite,
+)
 from django.views.generic.edit import CreateView
 from .forms import ContactForm
 from django_htmx.http import (
@@ -14,7 +22,7 @@ from django_htmx.http import (
 )  # target swap locations in the DOM from the server
 from django.core.paginator import Paginator
 from django.utils.decorators import method_decorator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 
@@ -206,6 +214,9 @@ class CategoryPostsView(TemplateView):
 class ArticleView(View):
     def get(self, request, pk):
         article = Article.objects.prefetch_related().get(pk=pk)  # fetching the article
+        is_bookmarked = Favourite.objects.filter(
+            user=request.user, post=article
+        ).exists()
         commentos = (
             Comment.objects.prefetch_related()
             .filter(article=article)
@@ -232,7 +243,10 @@ class ArticleView(View):
                     "article": article,
                     "comments": comments,
                     "count": commentos.count(),
-                    "articles": Article.objects.prefetch_related().all(),
+                    "articles": Article.objects.filter(
+                        category=article.category
+                    ).exclude(pk=pk),
+                    "is_bookmarked": is_bookmarked,
                 },
             )
 
@@ -266,6 +280,18 @@ class ArticleView(View):
                 article.save()
 
             return render(request, "partials/ratings.html", {"article": article})
+
+        elif request.htmx and request.headers.get("src") == "bookmark":
+            article = get_object_or_404(Article, pk=request.POST["article"])
+            Favourite.objects.get_or_create(user=request.user, post=article)            
+            return render(
+                request, "partials/bookmarked.html", context={"article": article}
+            )
+        elif request.htmx and request.headers.get("src") == "bookmarked":
+            article = get_object_or_404(Article, pk=request.POST["article"])
+            print(article)
+            Favourite.objects.filter(user=request.user, post=article).delete()
+            return render(request, "partials/bookmark.html", context={"article": article})
 
     def delete(self, request, pk, *args, **kwargs):  # if the request is Delete
         comments = Comment.objects.filter(article=Article.objects.get(pk=pk)).order_by(
@@ -308,24 +334,6 @@ class ReadingListView(TemplateView):
             articles = (
                 self.request.user.readings.prefetch_related().first().articles.all()
             )
-        except AttributeError:
-            articles = None
-        context["articles"] = articles
-        return context
-
-
-class SavedPostsView(TemplateView):
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-    #
-    template_name = "saved_posts/index.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        try:
-            articles = self.request.user.saved.prefetch_related().first().articles.all()
         except AttributeError:
             articles = None
         context["articles"] = articles

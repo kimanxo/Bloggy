@@ -129,12 +129,16 @@ class ReadingList(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
 
 
-class SavedPosts(models.Model):
-    user = models.ForeignKey(
-        get_user_model(), on_delete=models.CASCADE, related_name="saved"
-    )
-    articles = models.ManyToManyField(Article)
+class Favourite(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    post = models.ForeignKey(Article, on_delete=models.CASCADE)
     added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("user", "post")
+
+    def __str__(self):
+        return f"{self.user.username} - {self.post.title}"
 
 
 class Newsletter(models.Model):

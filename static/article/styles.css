@@ -2,8 +2,10 @@
   width: 100%;
   padding: 1.5rem;
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 1rem;
+  position: relative;
 }
 
 .content {
@@ -11,7 +13,7 @@
   letter-spacing: 0.5px;
 }
 
-.post_author img {
+.post_author img:first-child {
   width: 5rem;
   border-radius: 50%;
 }
@@ -33,6 +35,23 @@
 .post_author p a {
   font-weight: 600;
 }
+
+#bookmark, #read_later{
+  width: 2rem;
+  height: 2rem;
+  align-self: flex-start;
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+}
+
+#read_later{
+ 
+  right: 3rem;
+  padding-top: 0.2rem;
+}
+
+
 
 .post_content {
   padding: 1.5rem;

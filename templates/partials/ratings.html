@@ -1,8 +1,20 @@
+{% load static %}
 <div class="rt">
-            <span class="up" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"up"}'  hx-target=".rt">&uarr;</span>
-            <span class="count up_count">{{article.upvote}}</span>
-            <span class="down" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"down"}'  hx-target=".rt">&darr;</span>
-            <span class="count">{{article.downvote}}</span>
-            <img loading="lazy" src="" alt="comment icon" id="commentIcon" />
-            <span class="count">1</span>
-      </div>
+      {% if upvoted %}
+    <img src="{% static 'article/upvoted.png' %}" class="vote_btn_up" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"up"}' hx-target=".rt">
+            
+        {% else %}
+            <img src="{% static 'article/upvote.png' %}" class="vote_btn_up" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"up"}' hx-target=".rt">
+        {% endif %}
+    </img>
+    <span class="count up_count">{{ article.upvote }}</span>
+      {% if downvoted %}
+      <img src="{% static 'article/downvoted.png' %}" class="vote_btn_down" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"down"}' hx-target=".rt">
+        {% else %}
+            <img src="{% static 'article/downvote.png' %}" class="vote_btn_down" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"down"}' hx-target=".rt">
+        {% endif %}
+    </span>
+    <span class="count">{{ article.downvote }}</span>
+    <img loading="lazy" src="{% static 'article/comment.png' %}" alt="comment icon" id="commentIcon" />
+    <span class="count">1</span>
+</div>

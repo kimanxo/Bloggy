@@ -11,6 +11,7 @@ from .models import (
     Newsletter,
     Subscriber,
     Favourite,
+    Vote,
 )
 
 
@@ -103,3 +104,4 @@ admin.site.register(ReadLater)
 admin.site.register(Newsletter)
 admin.site.register(Subscriber)
 admin.site.register(Favourite)
+admin.site.register(Vote)

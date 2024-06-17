@@ -39,6 +39,8 @@ class Article(models.Model):
     title = models.CharField(max_length=256, null=False, blank=False)
     excert = models.TextField(max_length=512, null=False, blank=False)
     content = RichTextField(max_length=8192, null=False, blank=False)
+    upvote = models.IntegerField(default=0)
+    downvote = models.IntegerField(default=0)
     image = models.ImageField(
         upload_to="articles_images", blank=True
     )  # media folder for this field = "articles_images"
@@ -58,8 +60,6 @@ class Article(models.Model):
         on_delete=models.CASCADE,
         related_name="articles",
     )
-    upvote = models.PositiveIntegerField(blank=False, null=False, default=0)
-    downvote = models.PositiveIntegerField(blank=False, null=False, default=0)
 
     def __str__(self) -> str:
         return self.title
@@ -121,9 +121,6 @@ class Profile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-
-
-
 class Favourite(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     post = models.ForeignKey(Article, on_delete=models.CASCADE)
@@ -157,3 +154,14 @@ class Newsletter(models.Model):
 class Subscriber(models.Model):
     email = models.EmailField(max_length=64, blank=False, null=False)
     subscribed_at = models.DateTimeField(auto_now_add=True)
+
+
+class Vote(models.Model):
+    VOTE_CHOICES = [("up", "Upvote"), ("down", "Downvote")]
+
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    vote_type = models.CharField(max_length=4, choices=VOTE_CHOICES)
+
+    class Meta:
+        unique_together = ("user", "article")

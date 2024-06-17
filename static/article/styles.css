@@ -108,34 +108,23 @@ h2 {
   border-radius: var(--rounded);
 }
 
-.rating span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  width: auto;
-  height: 2rem;
-  font-size: 1rem;
-  border-radius: var(--rounded);
+
+.vote_btn_down{
+  rotate: 90deg;
 }
 
-.rating .up {
-  background-color: var(--black);
+.vote_btn_up{
+  rotate: -90deg;
+}
+
+.vote_btn_down, .vote_btn_up{
+  width: 2rem !important;
+  height: 3rem;
+}
+.commentIcon{
   width: 2rem;
-  cursor: pointer;
-}
+  height: 3rem;
 
-.rating .down {
-  background-color: var(--yellow);
-  width: 2rem;
-  cursor: pointer;
-}
-
-.rating .cmnt {
-  color: var(--black);
-  font-size: 1.5rem;
-  font-weight: 700;
-  display: flex;
 }
 
 .rating .count {

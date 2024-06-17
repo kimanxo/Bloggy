@@ -15,6 +15,7 @@ from .models import (
     Comment,
     Subscriber,
     Favourite,
+    Vote,
 )
 from django.views.generic.edit import CreateView
 from .forms import ContactForm
@@ -277,14 +278,34 @@ class ArticleView(View):
             request.headers.get("src") == "up" or request.headers.get("src") == "down"
         ):
             article = Article.objects.get(pk=pk)
-            if request.headers.get("src") == "up":
-                article.upvote += 1
-                article.save()
+            user_vote = Vote.objects.filter(user=request.user, article=article).first()
+            src = request.headers.get("src")
+            if user_vote:
+                if src == "up" and user_vote.vote_type == "down":
+                    user_vote.vote_type = "up"
+                    article.upvote += 1
+                    article.downvote -= 1
+                elif src == "down" and user_vote.vote_type == "up":
+                    user_vote.vote_type = "down"
+                    article.upvote -= 1
+                    article.downvote += 1
+                user_vote.save()
             else:
-                article.downvote += 1
-                article.save()
+                if src == "up":
+                    Vote.objects.create(user=request.user, article=article, vote_type="up")
+                    article.upvote += 1
+                elif src == "down":
+                    Vote.objects.create(user=request.user, article=article, vote_type="down")
+                    article.downvote += 1
+            article.save()
+            upvoted = Vote.objects.filter(user=request.user, article=article, vote_type='up').exists()
+            downvoted = Vote.objects.filter(user=request.user, article=article, vote_type='down').exists()
 
-            return render(request, "partials/ratings.html", {"article": article})
+            return render(
+                request,
+                "partials/ratings.html",
+                {"article": article, "upvoted": upvoted, "downvoted": downvoted},
+            )
 
         elif request.htmx and request.headers.get("src") == "bookmark":
             article = get_object_or_404(Article, pk=request.POST["article"])

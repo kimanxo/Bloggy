@@ -1,20 +1,35 @@
 {% load static %}
-<div class="rt">
-      {% if upvoted %}
-    <img src="{% static 'article/upvoted.png' %}" class="vote_btn_up" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"up"}' hx-target=".rt">
-            
-        {% else %}
-            <img src="{% static 'article/upvote.png' %}" class="vote_btn_up" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"up"}' hx-target=".rt">
-        {% endif %}
-    </img>
+<div class="rt" data-authenticated="{{ request.user.is_authenticated }}">
+    {% if upvoted %}
+        <img src="{% static 'article/upvoted.png' %}" class="vote_btn_up" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"up"}' hx-target=".rt">
+    {% else %}
+        <img src="{% static 'article/upvote.png' %}" class="vote_btn_up" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"up"}' hx-target=".rt">
+    {% endif %}
     <span class="count up_count">{{ article.upvote }}</span>
-      {% if downvoted %}
-      <img src="{% static 'article/downvoted.png' %}" class="vote_btn_down" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"down"}' hx-target=".rt">
-        {% else %}
-            <img src="{% static 'article/downvote.png' %}" class="vote_btn_down" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"down"}' hx-target=".rt">
-        {% endif %}
-    </span>
+    
+    {% if downvoted %}
+        <img src="{% static 'article/downvoted.png' %}" class="vote_btn_down" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"down"}' hx-target=".rt">
+    {% else %}
+        <img src="{% static 'article/downvote.png' %}" class="vote_btn_down" hx-post="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"down"}' hx-target=".rt">
+    {% endif %}
     <span class="count">{{ article.downvote }}</span>
     <img loading="lazy" src="{% static 'article/comment.png' %}" alt="comment icon" id="commentIcon" />
     <span class="count">1</span>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const voteButtons = document.querySelectorAll('.vote_btn_up, .vote_btn_down');
+    const isAuthenticated = document.querySelector('.rt').dataset.authenticated === "True";
+    const loginUrl = "/accounts/login/";
+
+    voteButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            if (!isAuthenticated) {
+                event.preventDefault();
+                window.location.href = loginUrl;
+            }
+        });
+    });
+});
+</script>

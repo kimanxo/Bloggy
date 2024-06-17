@@ -216,12 +216,15 @@ class CategoryPostsView(TemplateView):
 class ArticleView(View):
     def get(self, request, pk):
         article = Article.objects.prefetch_related().get(pk=pk)  # fetching the article
-        is_bookmarked = Favourite.objects.filter(
-            user=request.user, post=article
-        ).exists()
-        is_scheduled = ReadLater.objects.filter(
-            user=request.user, post=article
-        ).exists()
+        is_bookmarked = False
+        is_scheduled = False
+        if request.user.is_authenticated:
+            is_bookmarked = Favourite.objects.filter(
+                user=request.user, post=article
+            ).exists()
+            is_scheduled = ReadLater.objects.filter(
+                user=request.user, post=article
+            ).exists()
         commentos = (
             Comment.objects.prefetch_related()
             .filter(article=article)

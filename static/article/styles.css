@@ -120,6 +120,7 @@ h2 {
 .vote_btn_down, .vote_btn_up{
   width: 2rem !important;
   height: 3rem;
+  cursor: pointer;
 }
 .commentIcon{
   width: 2rem;

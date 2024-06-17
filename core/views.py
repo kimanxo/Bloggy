@@ -10,6 +10,7 @@ from .models import (
     Author,
     Article,
     Contact,
+    ReadLater,
     Testimonial,
     Comment,
     Subscriber,
@@ -217,6 +218,9 @@ class ArticleView(View):
         is_bookmarked = Favourite.objects.filter(
             user=request.user, post=article
         ).exists()
+        is_scheduled = ReadLater.objects.filter(
+            user=request.user, post=article
+        ).exists()
         commentos = (
             Comment.objects.prefetch_related()
             .filter(article=article)
@@ -247,6 +251,8 @@ class ArticleView(View):
                         category=article.category
                     ).exclude(pk=pk),
                     "is_bookmarked": is_bookmarked,
+                    "is_scheduled": is_scheduled,
+                    
                 },
             )
 
@@ -292,6 +298,20 @@ class ArticleView(View):
             print(article)
             Favourite.objects.filter(user=request.user, post=article).delete()
             return render(request, "partials/bookmark.html", context={"article": article})
+
+        elif request.htmx and request.headers.get("src") == "schedule":
+            article = get_object_or_404(Article, pk=request.POST["article"])
+            ReadLater.objects.get_or_create(user=request.user, post=article)
+            return render(
+                request, "partials/scheduled.html", context={"article": article}
+            )
+        elif request.htmx and request.headers.get("src") == "scheduled":
+            article = get_object_or_404(Article, pk=request.POST["article"])
+            print(article)
+            ReadLater.objects.filter(user=request.user, post=article).delete()
+            return render(
+                request, "partials/schedule.html", context={"article": article}
+            )
 
     def delete(self, request, pk, *args, **kwargs):  # if the request is Delete
         comments = Comment.objects.filter(article=Article.objects.get(pk=pk)).order_by(

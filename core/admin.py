@@ -5,9 +5,9 @@ from .models import (
     Comment,
     Category,
     Contact,
+    ReadLater,
     Testimonial,
     Profile,
-    ReadingList,
     Newsletter,
     Subscriber,
     Favourite,
@@ -99,7 +99,7 @@ class TestimonialAdmin(admin.ModelAdmin):
 
 admin.site.register(Testimonial, TestimonialAdmin)
 admin.site.register(Profile)
-admin.site.register(ReadingList)
+admin.site.register(ReadLater)
 admin.site.register(Newsletter)
 admin.site.register(Subscriber)
 admin.site.register(Favourite)

@@ -36,7 +36,7 @@
   font-weight: 600;
 }
 
-#bookmark, #read_later{
+#bookmark, #schedule{
   width: 2rem;
   height: 2rem;
   align-self: flex-start;
@@ -45,7 +45,7 @@
   cursor: pointer;
 }
 
-#read_later{
+#schedule{
  
   right: 3rem;
   padding-top: 0.2rem;

@@ -1,0 +1,12 @@
+{% load static %}
+<img
+    src="{% static 'article/scheduled.png' %}"
+    alt=""
+    id="schedule"
+    title="remove article from readlist "
+    hx-post=""
+    hx-headers='{"X-CSRFToken": "{{ csrf_token }}", "src":"scheduled"}'
+    hx-target="#schedule"
+    hx-swap="outerHTML"
+    hx-vals='{ "article": "{{article.pk}}" }'
+  />

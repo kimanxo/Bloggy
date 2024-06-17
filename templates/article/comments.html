@@ -5,7 +5,11 @@
     
     <form class="input">
       {% csrf_token %}
+      {% if profile.picture %}
       <img loading="lazy" src="{{ profile.picture }}" style="width: 3rem; height: 3rem; border-radius: 50%;" alt="user" />
+      {% else %}
+      <img loading="lazy" src="{% static 'article/user.svg' %}" style="width: 3rem; height: 3rem; border-radius: 50%;" alt="user" />
+      {% endif %}
       <textarea name="comment" class="input_box" placeholder="Type Something.." required rows="1" contenteditable="true"></textarea>
       <button class="cmnt_btn" type="button"><img loading="lazy" src="{% static 'article/send.png' %}" role="button" id="send"  hx-post="" hx-headers='{"src": "comment"}' hx-target=".cmts" style="cursor: pointer; width: 1.5rem;" /></button>
     </form>

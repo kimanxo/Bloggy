@@ -1,11 +1,22 @@
-{% load static %} {% for comment in comments %}
+{% load static %}
+ {% for comment in comments %}
 <div class="comment">
+  {% if comment.user.profile.first.picture %}
+  
   <img
-    loading="lazy"
-    src="{{ comment.user.profile.first.picture }}"
-    style="width: 3rem; height: 3rem; border-radius: 50%"
-    alt="{{comment.user}}"
+  loading="lazy"
+  src="{{ comment.user.profile.first.picture }}"
+  style="width: 3rem; height: 3rem; border-radius: 50%"
+  alt="{{comment.user}}"
   />
+  {% else %}
+  <img
+  loading="lazy"
+  src="{% static 'article/user.svg' %}"
+  style="width: 3rem; height: 3rem; border-radius: 50%"
+  alt="{{comment.user}}"
+  />
+  {% endif %}
   <div>
     <div class="commenter">
       <div class="info">

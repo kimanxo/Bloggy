@@ -252,7 +252,6 @@ class ArticleView(View):
                     ).exclude(pk=pk),
                     "is_bookmarked": is_bookmarked,
                     "is_scheduled": is_scheduled,
-                    
                 },
             )
 
@@ -289,7 +288,7 @@ class ArticleView(View):
 
         elif request.htmx and request.headers.get("src") == "bookmark":
             article = get_object_or_404(Article, pk=request.POST["article"])
-            Favourite.objects.get_or_create(user=request.user, post=article)            
+            Favourite.objects.get_or_create(user=request.user, post=article)
             return render(
                 request, "partials/bookmarked.html", context={"article": article}
             )
@@ -297,7 +296,9 @@ class ArticleView(View):
             article = get_object_or_404(Article, pk=request.POST["article"])
             print(article)
             Favourite.objects.filter(user=request.user, post=article).delete()
-            return render(request, "partials/bookmark.html", context={"article": article})
+            return render(
+                request, "partials/bookmark.html", context={"article": article}
+            )
 
         elif request.htmx and request.headers.get("src") == "schedule":
             article = get_object_or_404(Article, pk=request.POST["article"])
@@ -351,10 +352,26 @@ class ReadingListView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         try:
-            articles = (
-                self.request.user.readings.prefetch_related().first().articles.all()
-            )
+            items = ReadLater.objects.filter(user=self.request.user)
         except AttributeError:
-            articles = None
-        context["articles"] = articles
+            items = None
+        context["items"] = items
+        return context
+
+
+class SavedPostsView(TemplateView):
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    #
+    template_name = "saved_posts/index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            items = Favourite.objects.filter(user=self.request.user)
+        except AttributeError:
+            items = None
+        context["items"] = items
         return context

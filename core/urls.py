@@ -8,6 +8,7 @@ from .views import (
     PrivacyPolicyView,
     ContactView,
     AboutView,
+    SavedPostsView,
     SettingsView,
     ReadingListView,
 )
@@ -24,10 +25,5 @@ urlpatterns = [
     path("about", AboutView.as_view(), name="about"),
     path("accounts/settings", SettingsView.as_view(), name="settings"),
     path("accounts/reading_list", ReadingListView.as_view(), name="reading_list"),
-    
-    # path(
-    #     "post/<int:post_id>/remove_from_favourites/",
-    #     RemoveFromFavourites.as_view(),
-    #     name="remove_from_favourites",
-    # ),
+    path("accounts/saved_posts", SavedPostsView.as_view(), name="saved_posts"),
 ]

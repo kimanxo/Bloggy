@@ -11,19 +11,14 @@
   <main>
     <h1>Settings</h1>
     <section class="change_image">
+      {% if profile.picture%}
       <img loading="lazy" src="{{ profile.picture }}" alt="" />
-      <p>Change picture</p>
+      {% else %}
+      <img loading="lazy" src="{% static 'article/user.svg' %}" alt="" />
+      {% endif %}
     </section>
     <section class="change_logins">
-      <article>
-        <div>
-          <p>Your Username</p>
-        </div>
-        <div>
-          <p>{{ request.user.username }}</p>
-          <a href="">Change</a>
-        </div>
-      </article>
+
       <article>
         <div>
           <p>Your Email</p>

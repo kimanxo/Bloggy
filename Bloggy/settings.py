@@ -193,31 +193,3 @@ SOCIALACCOUNT_PROVIDERS = {
         },
     },
 }
-
-
-# SOCIALACCOUNT_PROVIDERS = {
-#     "github": {
-#         "VERIFIED_EMAIL": True,
-#         "APP": {
-#             "client_id": "233b45962b1bb83e0cb3",
-#             "secret": "40ad30a7b040d9a742dd1c10c33e511a57c70dc5",
-#             "key": "",
-#         },
-#     },
-#     "yandex": {
-#         "VERIFIED_EMAIL": True,
-#         "APP": {
-#             "client_id": "994ee35e036646dfb34bdcf05da3feea",
-#             "secret": "25e7049f46984b9482a09207808712c9",
-#             "key": "",
-#         },
-#     },
-#     "google": {
-#         "VERIFIED_EMAIL": True,
-#         "APP": {
-#             "client_id": "476986475506-dp02hscq8ev6km8nktd8rlkghl39jrqu.apps.googleusercontent.com",
-#             "secret": "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",
-#             "key": "",
-#         },
-#     },
-# }

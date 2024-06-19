@@ -35,6 +35,10 @@ body {
   overflow-x: hidden;
 }
 
+main{
+  min-height: 100vh;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -221,6 +225,7 @@ footer p {
   font-size: var(--h6);
   font-weight: 700;
 }
+
 
 footer nav ul {
   display: flex;

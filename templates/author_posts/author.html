@@ -5,9 +5,15 @@
     <h1>Hey there, I'm {{ author.name }} and Welcome to my blog!</h1>
     <p>{{ author.description }}</p>
     <div class="rating">
-      <span>&uarr;</span>
-      <span>7</span>
-      <span>&darr;</span>
+      {% if author.facebook %}
+        <a href="{{ author.facebook }}"><img loading="lazy" src="{% static 'landing/facebook.svg' %}" alt="facebook" /></a>
+      {% endif %}
+      {% if author.instagram %}
+        <a href="{{ author.instagram }}"><img loading="lazy" src="{% static 'landing/instagram.svg' %}" alt="instagram" /></a>
+      {% endif %}
+      {% if author.twitter %}
+        <a href="{{ author.twitter }}"><img loading="lazy" src="{% static 'landing/twitter.svg' %}" alt="twitter" /></a>
+      {% endif %}
     </div>
   </div>
 </header>

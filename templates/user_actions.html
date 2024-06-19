@@ -9,7 +9,7 @@
         {% if profile.picture %}
           <img loading="lazy"  loading="lazy" src="{{ profile.picture }}" alt="" class="avatar" style="width: 2rem; height: 2rem; border-radius: 50%;"/>
       {% else %}
-        <img loading="lazy" loading="lazy"  src="{% static 'login/user_avatar.svg' %}" alt="" />
+        <img loading="lazy" loading="lazy"  src="{% static 'article/user.svg' %}" alt="" />
       {% endif %}
       
       <p>{{ request.user }}</p>

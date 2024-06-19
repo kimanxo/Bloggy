@@ -21,7 +21,7 @@
     <div class="commenter">
       <div class="info">
         <span id="user">{{ comment.user.username }}</span>
-        <span id="time">2mo ago</span>
+        <span id="time">{{ comment.created_at }}</span>
 
         {% if request.user == comment.user %}
 

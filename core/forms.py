@@ -2,11 +2,9 @@ from django.forms import ModelForm
 from .models import Contact
 
 
-
-
 # contact form controll
 class ContactForm(ModelForm):
-    
+
     class Meta:
         model = Contact
         fields = ["email", "name", "subject", "message"]
@@ -30,14 +28,13 @@ class ContactForm(ModelForm):
                 "max_length": "please user a shorter message < 640",
             },
         }
-        
-    # adding placeholder text correspondingly 
+
+    # adding placeholder text correspondingly
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
-        
-        
+
         for field in self.fields:
             custom_attrs = {
-                'placeholder': field # each field will have a placeholder text based on the field name
+                "placeholder": field  # each field will have a placeholder text based on the field name
             }
             self.fields[field].widget.attrs.update(custom_attrs)

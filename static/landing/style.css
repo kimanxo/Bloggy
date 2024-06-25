@@ -137,7 +137,10 @@ header div span a {
   height: 15rem;
   min-width: 15rem;
   max-width: 15rem;
+  margin-left: 0 !important;
+  cursor: pointer;
 }
+
 
 .author div {
   display: flex;
@@ -156,11 +159,13 @@ header div span a {
 }
 
 .author ul {
-  display: flex;
-  width: 100%;
-  justify-content: space-evenly;
-  align-items: end;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: start;
+    gap: 2rem;
 }
+
 
 .author > img {
   width: 6rem;
